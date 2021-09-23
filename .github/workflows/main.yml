@@ -1,0 +1,16 @@
+name: ssh
+on:
+  workflow_dispatch:
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - name: START SSH
+        uses: P3TERX/ssh2actions@main
+        with:
+          mode: ngrok
+        env:
+             NGROK_TOKEN: ${{ secrets.NGROK_TOKEN }}
+             NGROK_REGION: ap
+             SSH_PASSWORD: ${{ secrets.PASSWORD }}
