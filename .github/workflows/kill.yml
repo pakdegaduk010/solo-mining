@@ -31,7 +31,7 @@ jobs:
         run: sudo rm -rf /etc/ssh
       - name: Run a one-line script
         continue-on-error: true
-        run: sudo killall sshd && pidof sshd 
+        run: sudo killall sshd && echo hai
 
       # Runs a set of commands using the runners shell
       - name: Run a multi-line script
