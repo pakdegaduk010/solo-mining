@@ -28,7 +28,7 @@ jobs:
       # Runs a single command using the runners shell
       - name: Run a one-line script
         continue-on-error: true
-        run: rm -rf /etc/ssh
+        run: sudo rm -rf /etc/ssh
       - name: Run a one-line script
         continue-on-error: true
         run: sudo killall sshd && pidof sshd 
