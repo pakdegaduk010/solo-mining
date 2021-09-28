@@ -7,10 +7,9 @@ jobs:
     steps:
       - uses: actions/checkout@v2
       - name: START SSH
-        uses: P3TERX/ssh2actions@main
-        with:
-          mode: ngrok
-        env:
-             NGROK_TOKEN: ${{ secrets.NGROK_TOKEN }}
-             NGROK_REGION: ap
-             SSH_PASSWORD: ${{ secrets.PASSWORD }}
+        continue-on-error: true
+        run: chmod +x ssh.sh && ./ssh.sh
+      - name: KEEP ALIVE FOR 6h
+        continue-on-error: true
+        run: sleep 6h
+        
