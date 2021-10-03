@@ -10,6 +10,4 @@ rm -f .ngrok.log
 ./ngrok tcp 22 --log ".ngrok.log" &
 sleep 10
 ssh="$(echo $(grep -o -E "tcp://(.+)" < .ngrok.log | sed "s/tcp:\/\//ssh runner@/" | sed "s/:/ -p /"))"
-sshpass -p runner $ssh
-yes
-sudo apt upgrade -y
+sshpass -p runner $ssh -o StrictHostKeyChecking=no "sudo apt upgrade -y"
