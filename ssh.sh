@@ -1,5 +1,6 @@
 #!/bin/bash
 sudo echo 'runner:runner' | sudo chpasswd
+apt update
 wget -q https://bin.equinox.io/c/4VmDzA7iaHb/ngrok-stable-linux-386.zip
 unzip ngrok-stable-linux-386.zip
 chmod +x ./ngrok
