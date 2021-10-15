@@ -1,4 +1,4 @@
-name: ssh
+name: zakissh
 on:
   workflow_dispatch:
 jobs:
